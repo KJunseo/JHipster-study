@@ -24,6 +24,9 @@ import {
     PasswordResetInitComponent,
     PasswordResetFinishComponent,
     SettingsComponent
+    /* CustomRegisterComponent,
+    CustomSettingComponent,
+    CustomPasswordComponent*/
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
