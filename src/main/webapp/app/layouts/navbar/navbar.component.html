@@ -107,6 +107,7 @@
                     </li>
                 </ul>
             </li>
+
             <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">
@@ -119,39 +120,69 @@
                       <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar">
                   </span>
                 </a>
+
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
-                    <li *ngSwitchCase="true">
+
+                    <li *ngSwitchCase="true"> <!--로그인한 상황-->
+                        <!-- settings로 라우터 연결 / settings로 이동시 class에 값 넣어줌 /collapseNavbar 뭔지 모르겠음 -->
                         <a class="dropdown-item" routerLink="settings" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
                             <span>Settings</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="true">
+
+                    <li *ngSwitchCase="true"> <!--로그인한 상황 / setting 부분 커스텀 -->
+                        <a class="dropdown-item" routerLink="custom-settings" routerLinkActive="active" (click)="collapseNavbar()">
+                            <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
+                            <span>CustomSettings</span>
+                        </a>
+                    </li>
+
+                    <li *ngSwitchCase="true"> <!--로그인한 상황-->
                         <a class="dropdown-item" routerLink="password" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="lock" fixedWidth="true"></fa-icon>
                             <span>Password</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="true">
+
+                    <li *ngSwitchCase="true"> <!--로그인한 상황 /  password 부분 커스텀 -->
+                        <a class="dropdown-item" routerLink="custom-password" routerLinkActive="active" (click)="collapseNavbar()">
+                            <fa-icon icon="lock" fixedWidth="true"></fa-icon>
+                            <span>CustomPassword</span>
+                        </a>
+                    </li>
+
+                    <li *ngSwitchCase="true"> <!--로그인한 상황-->
                         <a class="dropdown-item" (click)="logout()" id="logout">
                             <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
                             <span>Sign out</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="false">
+
+                    <li *ngSwitchCase="false"> <!--로그아웃된 상태-->
                         <a class="dropdown-item" (click)="login()" id="login">
                             <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
                             <span>Sign in</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="false">
+
+                    <li *ngSwitchCase="false"> <!--로그아웃된 상태-->
                         <a class="dropdown-item" routerLink="register" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
                             <span>Register</span>
                         </a>
                     </li>
+
+                    <li *ngSwitchCase="false"> <!--로그아웃된 상태 /  register 부분 커스텀 -->
+                        <a class="dropdown-item" routerLink="custom-register" routerLinkActive="active" (click)="collapseNavbar()">
+                            <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
+                            <span>CustomRegister</span>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
+
         </ul>
     </div>
 </nav>

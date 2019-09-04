@@ -1,0 +1,131 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<div class="background">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1><i class="fa fa-user-plus"></i>  Custom Registration</h1>
+
+            <div class="alert alert-success" *ngIf="success"> <!--등록 성공 시 뜨는 문구 -->
+                <strong>Registration saved!</strong> Please check your email for confirmation.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="error"> <!--등록 실패시 뜨는 문구 -->
+                <strong>Registration failed!</strong> Please try again later.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="errorUserExists"> <!--이미 존재 하는 유저일경우-->
+                <strong>Login name already registered!</strong> Please choose another one.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="errorEmailExists"><!--이미 존재하는 이메일일 경우-->
+                <strong>Email is already in use!</strong> Please choose another one.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="doNotMatch"> <!--패스워드와 패스워드 확인이 서로 같지 않을 경우-->
+                The password and its confirmation do not match!
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form name="form" role="form" (ngSubmit)="register()" [formGroup]="registerForm" *ngIf="!success">
+                <!--유효한 이름인지 확인하는 작업 -->
+                <div class="form-group">
+                    <label class="form-control-label" for="login">Username</label>
+                    <input type="text" class="form-control" id="login" name="login" placeholder="Your username"
+                           formControlName="login">
+                    <div *ngIf="registerForm.get('login').invalid && (registerForm.get('login').dirty || registerForm.get('login').touched)">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('login').errors.required">
+                            Your username is required.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('login').errors.minlength"
+                        >
+                            Your username is required to be at least 1 character.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('login').errors.maxlength"
+                        >
+                            Your username cannot be longer than 50 characters.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('login').errors.pattern"
+                        >
+                            Your username can only contain letters and digits.
+                        </small>
+                    </div>
+                </div>
+                <!--유효한 이메일인지 확인하는 작업 -->
+                <div class="form-group">
+                    <label class="form-control-label" for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Your email"
+                           formControlName="email">
+                    <div *ngIf="registerForm.get('email').invalid && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('email').errors.required"
+                        >
+                            Your email is required.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('email').errors.invalid"
+                        >
+                            Your email is invalid.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('email').errors.minlength"
+                        >
+                            Your email is required to be at least 5 characters.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('email').errors.maxlength"
+                        >
+                            Your email cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <!--유효한 비밀번호인지 확인하는 작업-->
+                <div class="form-group">
+                    <label class="form-control-label" for="password">New password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="New password"
+                           formControlName="password">
+                    <div *ngIf="registerForm.get('password').invalid && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('password').errors.required"
+                        >
+                            Your password is required.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('password').errors.minlength"
+                        >
+                            Your password is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('password').errors.maxlength"
+                        >
+                            Your password cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                    <jhi-password-strength-bar [passwordToCheck]="registerForm.get('password').value"></jhi-password-strength-bar>
+                </div>
+                <!--위에서 입력한 비밀번호를 확인하는 작업-->
+                <div class="form-group">
+                    <label class="form-control-label" for="confirmPassword">New password confirmation</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm the new password"
+                           formControlName="confirmPassword">
+                    <div *ngIf="registerForm.get('confirmPassword').invalid && (registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched)">
+                        <small class="form-text text-danger" *ngIf="registerForm.get('confirmPassword').errors.required"
+                        >
+                            Your confirmation password is required.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('confirmPassword').errors.minlength"
+                        >
+                            Your confirmation password is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="registerForm.get('confirmPassword').errors.maxlength"
+                        >
+                            Your confirmation password cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <button type="submit" [disabled]="registerForm.invalid" class="button">Register</button>
+            </form>
+            <p></p>
+            <div class="alert alert-warning">
+                <span>If you want to </span>
+                <a class="alert-link" (click)="openLogin()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
+            </div>
+        </div>
+    </div>
+</div>
