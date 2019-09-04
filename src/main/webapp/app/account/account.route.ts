@@ -5,6 +5,7 @@ import { activateRoute, passwordRoute, passwordResetFinishRoute, passwordResetIn
 import { customSettingsRoute } from './custom-settings/custom-settings.route';
 import { customRegisterRoute } from 'app/account/custom-register/custom-register.route';
 import { customPasswordRoute } from 'app/account/custom-password/custom-password.route';
+import { customPasswordResetInitRoute } from 'app/account/custom-password-reset/init/custom-password-reset-init.route';
 
 const ACCOUNT_ROUTES = [
   activateRoute,
@@ -15,7 +16,8 @@ const ACCOUNT_ROUTES = [
   settingsRoute,
   customSettingsRoute,
   customRegisterRoute,
-  customPasswordRoute
+  customPasswordRoute,
+  customPasswordResetInitRoute
 ];
 
 export const accountState: Routes = [

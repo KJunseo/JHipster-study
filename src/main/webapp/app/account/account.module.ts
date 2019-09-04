@@ -16,9 +16,7 @@ import {
 } from './';
 import { CustomRegisterComponent } from './custom-register/custom-register.component';
 import { CustomPasswordComponent } from './custom-password/custom-password.component';
-
-import { FinishComponent } from './custom-password-reset/finish/finish.component';
-import { InitComponent } from './custom-password-reset/init/init.component';
+import { CustomPasswordResetInitComponent } from './custom-password-reset/init/custom-password-reset-init.component';
 import { CustomPasswordStrengthBarComponent } from 'app/account/custom-password/custom-password-strength-bar.component';
 
 @NgModule({
@@ -35,8 +33,7 @@ import { CustomPasswordStrengthBarComponent } from 'app/account/custom-password/
     CustomRegisterComponent,
     CustomPasswordComponent,
     CustomPasswordStrengthBarComponent,
-    FinishComponent,
-    InitComponent
+    CustomPasswordResetInitComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
