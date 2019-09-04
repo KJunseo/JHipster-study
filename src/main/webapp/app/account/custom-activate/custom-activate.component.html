@@ -1,0 +1,20 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<div class="background">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1><i class="fa fa-check-circle"></i> Custom Activation</h1>
+
+            <div class="alert alert-success" *ngIf="success">
+                <span><strong>Your user account has been activated.</strong> Please </span>
+                <a class="alert-link" (click)="login()">sign in</a>.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="error">
+                <strong>Your user could not be activated.</strong> Please use the registration form to sign up.
+            </div>
+
+        </div>
+    </div>
+</div>

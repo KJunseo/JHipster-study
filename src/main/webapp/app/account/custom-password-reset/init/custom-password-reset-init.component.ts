@@ -5,7 +5,7 @@ import { EMAIL_NOT_FOUND_TYPE } from 'app/shared';
 import { CustomPasswordResetInitService } from 'app/account/custom-password-reset/init/custom-password-reset-init.service';
 
 @Component({
-  selector: 'jhi-init',
+  selector: 'jhi-custom-reset-init',
   templateUrl: './custom-password-reset-init.component.html',
   styleUrls: ['./custom-password-reset-init.component.scss']
 })
@@ -31,7 +31,7 @@ export class CustomPasswordResetInitComponent implements AfterViewInit {
   requestReset() {
     this.error = null;
     this.errorEmailNotExists = null;
-
+    //custom-password-reset-init.service.ts의 save호출
     this.passwordResetInitService.save(this.resetRequestForm.get(['email']).value).subscribe(
       () => {
         this.success = 'OK';

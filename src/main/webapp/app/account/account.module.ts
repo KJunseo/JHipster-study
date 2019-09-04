@@ -18,6 +18,8 @@ import { CustomRegisterComponent } from './custom-register/custom-register.compo
 import { CustomPasswordComponent } from './custom-password/custom-password.component';
 import { CustomPasswordResetInitComponent } from './custom-password-reset/init/custom-password-reset-init.component';
 import { CustomPasswordStrengthBarComponent } from 'app/account/custom-password/custom-password-strength-bar.component';
+import { CustomPasswordResetFinishComponent } from 'app/account/custom-password-reset/finish/custom-password-reset-finish.component';
+import { CustomActivateComponent } from './custom-activate/custom-activate.component';
 
 @NgModule({
   imports: [TutorialSharedModule, RouterModule.forChild(accountState)],
@@ -33,7 +35,9 @@ import { CustomPasswordStrengthBarComponent } from 'app/account/custom-password/
     CustomRegisterComponent,
     CustomPasswordComponent,
     CustomPasswordStrengthBarComponent,
-    CustomPasswordResetInitComponent
+    CustomPasswordResetInitComponent,
+    CustomPasswordResetFinishComponent,
+    CustomActivateComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
