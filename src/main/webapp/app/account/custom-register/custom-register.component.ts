@@ -12,15 +12,15 @@ import { CustomRegisterService } from './custom-register.service';
   styleUrls: ['./custom-register.component.scss']
 })
 export class CustomRegisterComponent implements OnInit, AfterViewInit {
-  doNotMatch: string; //패스워드와 패스워드확인이 서로 같지않을 경우를 확인하는 변수
-  error: string; //등록 실패임을 확인하는 변수
-  errorEmailExists: string; //이미 존재하는 이메일일 경우를 확인하는 변수
-  errorUserExists: string; //이미 존재하는 유저일 경우를 확인하는 변수
-  success: boolean; //등록 성공임을 확인하는 변수
+  doNotMatch: string; // 패스워드와 패스워드확인이 서로 같지않을 경우를 확인하는 변수
+  error: string; // 등록 실패임을 확인하는 변수
+  errorEmailExists: string; // 이미 존재하는 이메일일 경우를 확인하는 변수
+  errorUserExists: string; // 이미 존재하는 유저일 경우를 확인하는 변수
+  success: boolean; // 등록 성공임을 확인하는 변수
   modalRef: NgbModalRef;
 
   registerForm = this.fb.group({
-    //유효한 form 조건
+    // 유효한 form 조건
     login: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50), Validators.pattern('^[_.@A-Za-z0-9-]*$')]],
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
@@ -67,7 +67,7 @@ export class CustomRegisterComponent implements OnInit, AfterViewInit {
     }
   }
 
-  //로그인 창으로 바로 넘어가게 해준다.
+  // 로그인 창으로 바로 넘어가게 해준다.
   openLogin() {
     this.modalRef = this.loginModalService.open();
   }
