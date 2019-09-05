@@ -91,6 +91,13 @@ public class MailService {
     }
 
     @Async
+    public void customSendActivationEmail(User user) {
+        log.debug("Sending activation email to '{}'", user.getEmail());
+        sendEmailFromTemplate(user, "mail/customActivationEmail", "email.activation.title");
+    }
+
+
+    @Async
     public void sendCreationEmail(User user) {
         log.debug("Sending creation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/creationEmail", "email.activation.title");
@@ -100,5 +107,11 @@ public class MailService {
     public void sendPasswordResetMail(User user) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
+    }
+    //custom 이메일 보내주는 부분
+    @Async
+    public void customSendPasswordResetMail(User user) {
+        log.debug("Sending password reset email to '{}'", user.getEmail());
+        sendEmailFromTemplate(user, "mail/customPasswordResetEmail", "email.reset.title");
     }
 }

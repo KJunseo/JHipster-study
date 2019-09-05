@@ -68,6 +68,16 @@ public class AccountResource {
         mailService.sendActivationEmail(user);
     }
 
+    @PostMapping("/custom-register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void customRegisterAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+        if (!checkPasswordLength(managedUserVM.getPassword())) {
+            throw new InvalidPasswordException();
+        }
+        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        mailService.customSendActivationEmail(user);
+    }
+
     /**
      * {@code GET  /activate} : activate the registered user.
      *
@@ -76,6 +86,14 @@ public class AccountResource {
      */
     @GetMapping("/activate")
     public void activateAccount(@RequestParam(value = "key") String key) {
+        Optional<User> user = userService.activateRegistration(key);
+        if (!user.isPresent()) {
+            throw new AccountResourceException("No user was found for this activation key");
+        }
+    }
+
+    @GetMapping("/custom-activate")
+    public void customActivateAccount(@RequestParam(value = "key") String key) {
         Optional<User> user = userService.activateRegistration(key);
         if (!user.isPresent()) {
             throw new AccountResourceException("No user was found for this activation key");
@@ -143,6 +161,14 @@ public class AccountResource {
         userService.changePassword(passwordChangeDto.getCurrentPassword(), passwordChangeDto.getNewPassword());
     }
 
+    @PostMapping(path = "/account/custom-change-password")
+    public void customChangePassword(@RequestBody PasswordChangeDTO passwordChangeDto) {
+        if (!checkPasswordLength(passwordChangeDto.getNewPassword())) {
+            throw new InvalidPasswordException();
+        }
+        userService.changePassword(passwordChangeDto.getCurrentPassword(), passwordChangeDto.getNewPassword());
+    }
+
     /**
      * {@code POST   /account/reset-password/init} : Send an email to reset the password of the user.
      *
@@ -156,6 +182,15 @@ public class AccountResource {
                .orElseThrow(EmailNotFoundException::new)
        );
     }
+    //custom 비밀번호 초기화
+    @PostMapping(path = "/account/custom-reset-password/init")
+    public void customRequestPasswordReset(@RequestBody String mail) {
+        mailService.customSendPasswordResetMail(
+            userService.requestPasswordReset(mail)
+                .orElseThrow(EmailNotFoundException::new)
+        );
+    }
+
 
     /**
      * {@code POST   /account/reset-password/finish} : Finish to reset the password of the user.
@@ -166,6 +201,19 @@ public class AccountResource {
      */
     @PostMapping(path = "/account/reset-password/finish")
     public void finishPasswordReset(@RequestBody KeyAndPasswordVM keyAndPassword) {
+        if (!checkPasswordLength(keyAndPassword.getNewPassword())) {
+            throw new InvalidPasswordException();
+        }
+        Optional<User> user =
+            userService.completePasswordReset(keyAndPassword.getNewPassword(), keyAndPassword.getKey());
+
+        if (!user.isPresent()) {
+            throw new AccountResourceException("No user was found for this reset key");
+        }
+    }
+
+    @PostMapping(path = "/account/custom-reset-password/finish")
+    public void customFinishPasswordReset(@RequestBody KeyAndPasswordVM keyAndPassword) {
         if (!checkPasswordLength(keyAndPassword.getNewPassword())) {
             throw new InvalidPasswordException();
         }
