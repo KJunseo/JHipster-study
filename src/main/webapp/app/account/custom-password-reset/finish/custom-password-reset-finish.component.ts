@@ -5,11 +5,12 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginModalService } from 'app/core';
-import { CustomPasswordResetFinishService } from 'app/account/custom-password-reset/finish/custom-reset-finish.service';
+import { CustomPasswordResetFinishService } from 'app/account/custom-password-reset/finish/custom-password-reset-finish.service';
 
 @Component({
   selector: 'jhi-custom-password-reset-finish',
-  templateUrl: './custom-password-reset-finish.component.html'
+  templateUrl: './custom-password-reset-finish.component.html',
+  styleUrls: ['./custom-password-reset-finish.component.scss']
 })
 export class CustomPasswordResetFinishComponent implements OnInit, AfterViewInit {
   doNotMatch: string;

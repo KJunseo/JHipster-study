@@ -5,10 +5,10 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 
 @Injectable({ providedIn: 'root' }) //의존성 주입
-export class CustomRegister {
+export class CustomRegisterService {
   constructor(private http: HttpClient) {}
 
   save(account: any): Observable<any> {
-    return this.http.post(SERVER_API_URL + 'api/register', account);
+    return this.http.post(SERVER_API_URL + 'api/custom-register', account);
   }
 }

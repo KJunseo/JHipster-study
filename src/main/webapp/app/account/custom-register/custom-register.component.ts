@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LoginModalService } from 'app/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared';
-import { CustomRegister } from './custom-register.service';
+import { CustomRegisterService } from './custom-register.service';
 
 @Component({
   selector: 'jhi-custom-register',
@@ -29,7 +29,7 @@ export class CustomRegisterComponent implements OnInit, AfterViewInit {
 
   constructor(
     private loginModalService: LoginModalService,
-    private registerService: CustomRegister,
+    private registerService: CustomRegisterService,
     private elementRef: ElementRef,
     private renderer: Renderer,
     private fb: FormBuilder
